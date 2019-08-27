@@ -6,7 +6,7 @@ class EventForm extends Component {
             const {cancelFormOpen} = this.props;
             return (
                   <Segment>
-                        <Form>
+                        <Form autoComplete="off">
                               <Form.Field>
                                     <label>Event Title</label>
                                     <input placeholder="First Name" />
