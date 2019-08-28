@@ -6,7 +6,7 @@ import EventListAttendee from './EventListAttendee';
 class EventListItem extends Component {
       
       render() {
-            const {event} = this.props
+            const {event, selectEvent} = this.props
             return (
                        <Segment.Group>
                           <Segment>
@@ -30,14 +30,19 @@ class EventListItem extends Component {
                           </Segment>
                           <Segment secondary>
                             <List horizontal>
-                                  {event.attendee && event.attendees.map( attendee => {
+                                  {event.attendees && event.attendees.map( attendee => {
                                         return <EventListAttendee key={attendee.id} attendee={attendee} />
                                   })}
                             </List>
                           </Segment>
                           <Segment clearing>
                               <span>{event.description}</span>
-                            <Button as="a" color="green" floated="right" content="View" />
+                            <Button
+                            onClick={() => {selectEvent(event)}}
+                              as="a"
+                              color="green"
+                              floated="right"
+                              content="View" />
                           </Segment>
                         </Segment.Group>
             );

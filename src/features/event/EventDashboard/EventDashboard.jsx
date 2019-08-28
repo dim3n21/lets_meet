@@ -9,7 +9,7 @@ const eventsDashBoard = [
   {
     id: '1',
     title: 'Trip to Tower of London',
-    date: '2018-03-27T11:00:00+00:00',
+    date: '2018-03-27',
     category: 'culture',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -33,7 +33,7 @@ const eventsDashBoard = [
   {
     id: '2',
     title: 'Trip to Punch and Judy Pub',
-    date: '2018-03-28T14:00:00+00:00',
+    date: '2018-03-28',
     category: 'drinks',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -61,13 +61,27 @@ class EventDashboard extends Component {
 
   state = {
     events: eventsDashBoard,
-    isOpen: false
+    isOpen: false,
+    selectedEvent: null
   }
 
-  handleIsOpenToggle = () => {
+  // handleIsOpenToggle = () => {
+  //   this.setState({
+  //     ...this.state,
+  //     isOpen: !this.state.isOpen
+  //   })
+  // }
+
+  handleCreateFormOpen = () => {
     this.setState({
-      ...this.state,
-      isOpen: !this.state.isOpen
+      isOpen: true,
+      selectedEvent: null
+    })
+  }
+
+  handleFormCancel = () => {
+    this.setState({
+      isOpen: false
     })
   }
 
@@ -80,20 +94,32 @@ class EventDashboard extends Component {
     })
   }
 
+  handleSelectEvent = (event) => {
+    this.setState({
+      isOpen: true,
+      selectedEvent: event
+    })
+  }
+
 
   render() {  
-  const {events, isOpen} = this.state;
+  const {events, isOpen, selectedEvent} = this.state;
     return (
         <div>
               <Grid>
                     <Grid.Column width={10}>
-                          <EventList events={events} />
+                          <EventList events={events} selectEvent={this.handleSelectEvent} />
                     </Grid.Column>
                     <Grid.Column width={6}>
-                          <Button color="green" onClick={this.handleIsOpenToggle}> Create Event </Button>
+                          <Button
+                            onClick={this.handleCreateFormOpen}
+                            color="green"
+                            positive                              
+                            content="Create Event" />
                           {isOpen && <EventForm
+                            selectEvent={selectedEvent}
                             createEvent={this.handleCreateEvent}
-                            cancelFormOpen={this.handleIsOpenToggle} /> }
+                            cancelFormOpen={this.handleFormCancel} /> }
                     </Grid.Column>
               </Grid>
         </div>
