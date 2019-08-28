@@ -116,6 +116,17 @@ class EventDashboard extends Component {
       selectedEvent: null
     })
   }
+
+  handleDeleteEvent = (id) => {
+    let newState = {...this.state}
+    newState.events = newState.events.filter(event => event.id !== id)
+
+    this.setState({
+      events: newState.events
+    })
+  }
+
+  
   
 
   render() {  
@@ -126,7 +137,8 @@ class EventDashboard extends Component {
                     <Grid.Column width={10}>
                           <EventList
                             events={events}
-                            selectEvent={this.handleSelectEvent} />
+                            selectEvent={this.handleSelectEvent}
+                            deleteEvent={this.handleDeleteEvent} />
                     </Grid.Column>
                     <Grid.Column width={6}>
                           <Button
