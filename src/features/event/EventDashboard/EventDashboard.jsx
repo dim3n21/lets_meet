@@ -101,6 +101,22 @@ class EventDashboard extends Component {
     })
   }
 
+  handleUpdateEvent = (updatedEvent) => {
+    let newState = {...this.state}
+    
+    newState.events.map((event, i) => {
+      if (event.id === updatedEvent.id) {
+        newState.events[i] = updatedEvent;
+      }
+    })
+
+    this.setState({
+      events: newState.events,
+      isOpen: false,
+      selectedEvent: null
+    })
+  }
+  
 
   render() {  
   const {events, isOpen, selectedEvent} = this.state;
@@ -120,6 +136,7 @@ class EventDashboard extends Component {
                             content="Create Event" />
                           {isOpen && <EventForm
                             key={selectedEvent ? selectedEvent.id : 0}
+                            updateEvent={this.handleUpdateEvent}
                             selectedEvent={selectedEvent}
                             createEvent={this.handleCreateEvent}
                             cancelFormOpen={this.handleFormCancel} /> }
