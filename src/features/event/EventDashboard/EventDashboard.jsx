@@ -108,7 +108,9 @@ class EventDashboard extends Component {
         <div>
               <Grid>
                     <Grid.Column width={10}>
-                          <EventList events={events} selectEvent={this.handleSelectEvent} />
+                          <EventList
+                            events={events}
+                            selectEvent={this.handleSelectEvent} />
                     </Grid.Column>
                     <Grid.Column width={6}>
                           <Button
@@ -117,7 +119,8 @@ class EventDashboard extends Component {
                             positive                              
                             content="Create Event" />
                           {isOpen && <EventForm
-                            selectEvent={selectedEvent}
+                            key={selectedEvent ? selectedEvent.id : 0}
+                            selectedEvent={selectedEvent}
                             createEvent={this.handleCreateEvent}
                             cancelFormOpen={this.handleFormCancel} /> }
                     </Grid.Column>
