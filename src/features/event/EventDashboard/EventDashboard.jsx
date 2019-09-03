@@ -6,9 +6,17 @@ import { Grid, Button } from 'semantic-ui-react';
 import EventList from '../EventList/EventList';
 import EventForm from '../EventForm/EventForm';
 
+import { createEvent, deleteEvent, updateEvent } from '../eventActions';
+
 const mapStateToProps = (state) => ({
   events: state.events
 })
+
+const mapDispatchToProps = {
+  createEvent,
+  deleteEvent,
+  updateEvent
+}
 
 
 class EventDashboard extends Component {
@@ -30,54 +38,41 @@ class EventDashboard extends Component {
       isOpen: true,
       selectedEvent: null
     })
-  }
+  };
 
   handleFormCancel = () => {
     this.setState({
       isOpen: false
     })
-  }
+  };
 
   handleCreateEvent = (newEvent) => {
     newEvent.id = cuid();
     newEvent.hostPhotoURL = '/assets/user.png';
+    this.props.createEvent(newEvent);
     this.setState({
-      events: [...this.state.events, newEvent],
       isOpen: false
     })
-  }
+  };
 
   handleSelectEvent = (event) => {
     this.setState({
       isOpen: true,
       selectedEvent: event
     })
-  }
+  };
 
   handleUpdateEvent = (updatedEvent) => {
-    let newState = {...this.state}
-    
-    newState.events.map((event, i) => {
-      if (event.id === updatedEvent.id) {
-        newState.events[i] = updatedEvent;
-      }
-    })
-
+    this.props.updateEvent(updatedEvent);
     this.setState({
-      events: newState.events,
       isOpen: false,
       selectedEvent: null
     })
-  }
+  };
 
   handleDeleteEvent = (id) => {
-    let newState = {...this.state}
-    newState.events = newState.events.filter(event => event.id !== id)
-
-    this.setState({
-      events: newState.events
-    })
-  }
+    this.props.deleteEvent(id);
+  };
 
   
   
@@ -113,4 +108,4 @@ class EventDashboard extends Component {
   }
 }
 
-export default connect(mapStateToProps,)(EventDashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(EventDashboard);
