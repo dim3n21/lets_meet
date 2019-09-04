@@ -4,6 +4,7 @@ import { reduxForm, Field } from 'redux-form';
 import { Segment, Form, Button } from 'semantic-ui-react'
 import cuid from 'cuid';
 import {updateEvent, createEvent} from '../eventActions';
+import TextInput from '../../../app/common/form/TextInput';
 
 
 
@@ -74,7 +75,7 @@ class EventForm extends Component {
             return (
                   <Segment>
                         <Form autoComplete="off" onSubmit={this.handleFormSubmit}>
-                              <Field name="title" component="input" placeholder="Event Title" />
+                              <Field name="title" component={TextInput} placeholder="Event Title" />
                               <Form.Field>
                                     <label>Event Date</label>
                                     <input
