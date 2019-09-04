@@ -9,7 +9,7 @@ const EventDetailedChat = () => {
                     textAlign="center"
                     attached="top"
                     inverted
-                    color="teal"
+                    color="green"
                     style={{ border: 'none' }}
                   >
                     <Header>Chat about this event</Header>
@@ -84,7 +84,7 @@ const EventDetailedChat = () => {
                           content="Add Reply"
                           labelPosition="left"
                           icon="edit"
-                          primary
+                          color="orange"
                         />
                       </Form>
                     </Comment.Group>
