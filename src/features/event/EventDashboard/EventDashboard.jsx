@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import cuid from 'cuid';
 import { connect } from 'react-redux';
 
 import { Grid } from 'semantic-ui-react';
@@ -18,20 +17,6 @@ const mapDispatchToProps = {
 }
 
 class EventDashboard extends Component {
-
-  
-  handleCreateEvent = (newEvent) => {
-    newEvent.id = cuid();
-    newEvent.hostPhotoURL = '/assets/user.png';
-    this.props.createEvent(newEvent);
-    this.setState({
-      isOpen: false
-    })
-  };
-
-  handleUpdateEvent = (updatedEvent) => {
-    this.props.updateEvent(updatedEvent);
-  };
 
   handleDeleteEvent = (id) => {
     this.props.deleteEvent(id);
