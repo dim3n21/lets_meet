@@ -8,6 +8,7 @@ import {updateEvent, createEvent} from '../eventActions';
 import TextInput from '../../../app/common/form/TextInput';
 import TextArea from '../../../app/common/form/TextArea';
 import SelectInput from '../../../app/common/form/SelectInput';
+import DateInput from '../../../app/common/form/DateInput';
 
 
 
@@ -115,7 +116,7 @@ class EventForm extends Component {
                                                 
                                                 <Field
                                                       name="date"
-                                                      component={TextInput}
+                                                      component={DateInput}
                                                       placeholder="Event Date" />
                                                 
                                                 <Button
