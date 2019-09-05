@@ -15,7 +15,7 @@ const HomePage = ({history}) => {
                    />
                    Let's Meet
                  </Header>
-                 <Button onClick={() => history.push('/events') }  size='med' inverted>
+                 <Button onClick={() => history.push('/events') }  size='medium' inverted>
                    Get started
                    <Icon name='right arrow' inverted />
                  </Button>

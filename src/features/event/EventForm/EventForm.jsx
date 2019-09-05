@@ -13,20 +13,14 @@ import SelectInput from '../../../app/common/form/SelectInput';
 const mapStateToProps = (state, ownProps) => {
       const eventId = ownProps.match.params.id;
 
-      let event = {
-            title: '',
-            date: '',
-            city: '',
-            venue: '',
-            hostedBy: ''
-      };
+      let event = {};
 
       if (eventId && state.events.length > 0) {
             event = state.events.filter( event => event.id === eventId)[0];
       }
 
       return {
-            event
+            initialValues: event
       }
 }
 
@@ -50,31 +44,32 @@ class EventForm extends Component {
            ...this.props.event
           }
 
-      handleFormSubmit = e => {
-            e.preventDefault();
-            if (this.state.id) {
-                  this.props.updateEvent(this.state);
-                  this.props.history.push(`/events/${this.state.id}`);
+      onFormSubmit = values => {
+            
+            if (this.props.initialValues.id) {
+                  this.props.updateEvent(values);
+                  this.props.history.push(`/events/${this.props.initialValues.id}`);
             } else {
                   const newEvent = {
-                        ...this.state,
+                        ...values,
                         id: cuid(),
-                        hostPhotoURL: '/assets/user.png'
+                        hostPhotoURL: '/assets/user.png',
+                        hostedBy: 'Bob'
                   }
                   this.props.createEvent(newEvent);
-                  this.props.history.push(`/events/events`);
-            }
-            
+                  this.props.history.push(`/events/${newEvent.id}`);
+            }     
       }
       
       render() {
+            const {history, initialValues} =  this.props
             return (
                   <Grid>
                         <Grid.Column width={10}>
                               <Segment>
                                     <Form autoComplete="off" onSubmit={this.handleFormSubmit}>
                                           <Header sub color='green' content='Event Details' />
-                                          <Form onSubmit={this.handleFormSubmit} autoComplete="off">
+                                          <Form onSubmit={this.props.handleSubmit(this.onFormSubmit)}                   autoComplete="off">
                                                 <Field
                                                       name="title"
                                                       component={TextInput}
@@ -119,7 +114,10 @@ class EventForm extends Component {
                                                 
                                                 <Button
                                                       type="button"
-                                                      onClick={this.props.history.goBack}>
+                                                      onClick={
+                                                            initialValues.id
+                                                                  ? () => history.push(`/events/${initialValues.id}`) : () => history.push('events') }
+                                                >
                                                             Cancel
                                                 </Button>
                                           </Form>

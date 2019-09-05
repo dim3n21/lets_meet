@@ -6,6 +6,7 @@ import { Segment, Item, Label, List } from 'semantic-ui-react';
 const EventDetailedSidebar = ({attendees}) => {
 
       const isHost = false;
+
       return (
                 <Fragment>
                   <Segment
@@ -16,12 +17,13 @@ const EventDetailedSidebar = ({attendees}) => {
                     inverted
                     color='green'
                   >
-                    {attendees && attendees.length} { attendees && attendees.length === 1 ? 'Person' : 'People'} Going
+                    {attendees && attendees.length}{' '}
+        {attendees && attendees.length === 1 ? 'Person' : 'People'} going
                   </Segment>
                   <Segment attached>
-                        <List relaxed devided>
+                        <List relaxed devided="true">
                               {attendees && attendees.map(attendee => (
-                                    <Item.Group divided>
+                                    <Item.Group divided key={attendee.id}>
                                     <Item style={{ position: 'relative' }}>
                                           {isHost && <Label
                                           style={{ position: 'absolute' }}
