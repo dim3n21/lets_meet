@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { Segment, Form, Button, Grid, Header, TextArea } from 'semantic-ui-react'
+import { Segment, Form, Button, Grid, Header } from 'semantic-ui-react'
 import cuid from 'cuid';
 import {updateEvent, createEvent} from '../eventActions';
 import TextInput from '../../../app/common/form/TextInput';
-import TextAera from '../../../app/common/form/TextArea';
+import TextArea from '../../../app/common/form/TextArea';
+import SelectInput from '../../../app/common/form/SelectInput';
+
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -32,6 +34,15 @@ const mapDispatchToProps = {
       updateEvent,
       createEvent
 }
+
+const category = [
+    {key: 'drinks', text: 'Drinks', value: 'drinks'},
+    {key: 'culture', text: 'Culture', value: 'culture'},
+    {key: 'film', text: 'Film', value: 'film'},
+    {key: 'food', text: 'Food', value: 'food'},
+    {key: 'music', text: 'Music', value: 'music'},
+    {key: 'travel', text: 'Travel', value: 'travel'},
+];
 
 class EventForm extends Component {
 
@@ -64,15 +75,53 @@ class EventForm extends Component {
                                     <Form autoComplete="off" onSubmit={this.handleFormSubmit}>
                                           <Header sub color='green' content='Event Details' />
                                           <Form onSubmit={this.handleFormSubmit} autoComplete="off">
-                                                <Field name="title" component={TextInput} placeholder="Event Name" />
-                                                <Field name="category" component={TextInput} placeholder="Event Category" />
-                                                <Field name="description" component={TextArea} rows={3} placeholder="Event Decription" />
-                                                <Header sub color='green' content='Event Location Details' />
-                                                <Field name="city" component={TextInput} placeholder="Event City" />
-                                                <Field name="venue" component={TextInput} placeholder="Event Venue" />
-                                                <Field name="date" component={TextInput} placeholder="Event Date" />
-                                                <Button positive type="submit">Submit </Button>
-                                                <Button type="button" onClick={this.props.history.goBack}>Cancel</Button>
+                                                <Field
+                                                      name="title"
+                                                      component={TextInput}
+                                                      placeholder="Event Name" />
+                                                
+                                                <Field
+                                                      name="category"
+                                                      component={SelectInput}
+                                                      options={category} 
+                                                      placeholder="Event Category" />
+                                          
+                                                <Field
+                                                      name="description"
+                                                      component={TextArea}
+                                                      rows={3}
+                                                      placeholder="Event Decription" />
+                                                
+                                                <Header
+                                                      sub color='green'
+                                                      content='Event Location Details' />
+                                                
+                                                <Field
+                                                      name="city"
+                                                      component={TextInput}
+                                                      placeholder="Event City" />
+                                                
+                                                <Field
+                                                      name="venue"
+                                                      component={TextInput}
+                                                      placeholder="Event Venue" />
+                                                
+                                                <Field
+                                                      name="date"
+                                                      component={TextInput}
+                                                      placeholder="Event Date" />
+                                                
+                                                <Button
+                                                      positive
+                                                      type="submit">
+                                                            Submit 
+                                                </Button>
+                                                
+                                                <Button
+                                                      type="button"
+                                                      onClick={this.props.history.goBack}>
+                                                            Cancel
+                                                </Button>
                                           </Form>
                                     </Form>
                               </Segment>
