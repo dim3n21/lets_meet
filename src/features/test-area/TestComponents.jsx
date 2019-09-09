@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TestPlaceInput from './TestPlaceInput';
 import { Button } from 'semantic-ui-react'
 import {connect} from 'react-redux';
 import {openModal} from '../modals/modalActions';
