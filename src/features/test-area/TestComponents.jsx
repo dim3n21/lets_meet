@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import {openModal} from '../modals/modalActions';
 
 
+
+
 const actions = {
       openModal
 }
@@ -15,8 +17,7 @@ class TestComponents extends Component {
             const {openModal} = this.props
             return (
                   <div>
-                  < TestPlaceInput />
-                  <Button onClick={() => {openModal('TestModal', {data: 42})}} color='teal' content='open modal' />
+                        <Button onClick={() => {openModal('TestModal', {data: 42})}} color='teal' content='open modal' />
                   </div>
             );
       }
