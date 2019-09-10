@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {closeModal} from "../modals/modalActions";
 import RegisterForm from "../auth/Register/RegisterForm";
 
-const actions = {closeModal};
+const mapDispatchToProps = {closeModal};
 
 class RegisterModal extends Component {
     render() {
@@ -28,4 +28,4 @@ class RegisterModal extends Component {
     }
 }
 
-export default connect(null, actions)(RegisterModal);
+export default connect(null, mapDispatchToProps)(RegisterModal);
