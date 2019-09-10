@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {connect} from 'react-redux';
 import { Menu, Container, Button } from 'semantic-ui-react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
@@ -44,10 +44,22 @@ class NavBar extends Component {
                                           Let's Meet
                                     </Menu.Item>
                                     <Menu.Item exact as={NavLink} to='/events' name="Events" />
-                                    <Menu.Item as={NavLink} to='/people' name="People" />
-                                    <Menu.Item>
-                                          <Button as={Link} to="/createEvent" floated="right" inverted content="Create Event" />
-                                    </Menu.Item>
+                                    {authenticated && 
+                                          <Fragment>
+                                                <Menu.Item
+                                                      as={NavLink}
+                                                      to='/people'
+                                                      name="People" />
+                                                <Menu.Item>
+                                                      <Button
+                                                            as={Link}
+                                                            to="/createEvent"
+                                                            floated="right"
+                                                            inverted
+                                                            content="Create Event" />
+                                                </Menu.Item>
+                                          </Fragment>
+                                    }
                               { authenticated ?
                                     <SignedInMenu signOut={this.handleSignOut} currentUser={auth.currentUser} /> 
                                     : 
