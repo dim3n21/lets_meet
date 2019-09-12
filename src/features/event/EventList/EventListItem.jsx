@@ -17,7 +17,7 @@ class EventListItem extends Component {
                                 <Item.Content>
                                   <Item.Header>{event.title}</Item.Header>
                                   <Item.Description>
-                                    Hosted by {event.hostedBy}>
+                                    Hosted by {event.hostedBy}
                                   </Item.Description>
                                 </Item.Content>
                               </Item>
