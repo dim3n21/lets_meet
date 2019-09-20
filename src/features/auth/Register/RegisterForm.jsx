@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { combineValidators, isRequired } from 'revalidate'
-import { Form, Segment, Button, Label } from 'semantic-ui-react';
+import { Form, Segment, Button, Label, Divider } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
 import TextInput from '../../../app/common/form/TextInput';
 import { registerUser } from '../authAction';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const mapDispatchToProps = {
   registerUser
@@ -43,7 +44,11 @@ const RegisterForm = ({handleSubmit, registerUser, error, invalid, submitting}) 
           <Button disabled={invalid || submitting} fluid size="large" color="teal">
             Register
           </Button>
+          <Divider horizontal>
+          Or
+        </Divider>
         </Segment>
+        <SocialLogin />
       </Form>
     </div>
   );
