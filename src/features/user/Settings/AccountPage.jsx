@@ -12,7 +12,7 @@ const validate = combineValidators({
   )()
 })
 
-const AccountPage = ({ error, invalid, submitting }) => {
+const AccountPage = ({ error, invalid, submitting, handleSubmit, updatePassword }) => {
 
   return (
     <Segment>
@@ -20,7 +20,7 @@ const AccountPage = ({ error, invalid, submitting }) => {
       <div>
         <Header color="teal" sub content="Change password" />
         <p>Use this form to update your account settings</p>
-        <Form>
+        <Form onSubmit={handleSubmit(updatePassword)}>
           <Field
             width={8}
             name="newPassword1"
