@@ -20,7 +20,7 @@ const mapState = state => ({
 });
 
 
-const SettingsDashboard = ({updatePassword}) => {
+const SettingsDashboard = ({updatePassword, providerId}) => {
 
       return (
             <Grid>
@@ -32,7 +32,7 @@ const SettingsDashboard = ({updatePassword}) => {
                               <Route path='/settings/photos' component={PhotosPage} />
                               <Route
                               path='/settings/account'
-                              render={() => <AccountPage updatePassword={updatePassword} />} />
+                              render={() => <AccountPage updatePassword={updatePassword} providerId={providerId} />} />
                         </Switch>
                   </Grid.Column>
                   <Grid.Column width="4">
