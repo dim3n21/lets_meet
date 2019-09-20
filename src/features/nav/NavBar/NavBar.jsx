@@ -9,7 +9,8 @@ import SignedInMenu from '../Menus/SignedInMenu';
 import {openModal} from '../../modals/modalActions';
 
 const MapStateToProps = (state) => ({
-      auth: state.firebase.auth
+      auth: state.firebase.auth,
+      profile: state.firebase.profile
 })
 
 const mapDispatchToProps = {
@@ -32,7 +33,7 @@ class NavBar extends Component {
       }
 
       render() {
-            const {auth} = this.props;
+            const {auth, profile} = this.props;
             const authenticated = auth.isLoaded && !auth.isEmpty;
             return (
                   <div>
@@ -60,7 +61,7 @@ class NavBar extends Component {
                                           </Fragment>
                                     }
                               { authenticated ?
-                                    <SignedInMenu signOut={this.handleSignOut} auth={auth} /> 
+                                    <SignedInMenu signOut={this.handleSignOut} profile={profile} /> 
                                     :
                                     <SignedOutMenu signIn={this.handleSignIn} register={this.handleRegister} /> }
                               </Container>
