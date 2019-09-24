@@ -11,7 +11,7 @@ const firebaseConfig = {
       authDomain: "lets-meet-6cae4.firebaseapp.com",
       databaseURL: "https://lets-meet-6cae4.firebaseio.com",
       projectId: "lets-meet-6cae4",
-      storageBucket: "",
+      storageBucket: "lets-meet-6cae4.appspot.com",
       messagingSenderId: "621508718903",
       appId: "1:621508718903:web:3fc1839267e8acd4882ab2"
     };
