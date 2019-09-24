@@ -7,7 +7,7 @@ import 'firebase/storage';
 import { firebaseAPI } from '../security/google';
 
 const firebaseConfig = {
-      apiKey: 'AIzaSyDxCVFmMz5T-pcz55NjYrtQLTKdN5PRPRw',
+      apiKey: firebaseAPI,
       authDomain: "lets-meet-6cae4.firebaseapp.com",
       databaseURL: "https://lets-meet-6cae4.firebaseio.com",
       projectId: "lets-meet-6cae4",
