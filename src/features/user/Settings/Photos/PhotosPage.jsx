@@ -2,13 +2,12 @@ import React, {useState, useEffect, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {firestoreConnect} from 'react-redux-firebase';
-import {Image, Segment, Header, Divider, Grid, Button, Card} from 'semantic-ui-react';
+import {Segment, Header, Divider, Grid, Button} from 'semantic-ui-react';
 import DropzoneInput from './DropzoneInput';
 import CropperInput from './CropperInput';
 import UserPhotos from './UserPhotos';
-import {uploadProfileImage, deletePhoto} from '../../userActions';
+import {uploadProfileImage, deletePhoto, setMainPhoto} from '../../userActions';
 import { toastr } from 'react-redux-toastr';
-import { withRouter } from 'react-router-dom';
 
 const query = ({ auth }) => {
     return [
@@ -23,7 +22,8 @@ const query = ({ auth }) => {
 
 const actions = {
     uploadProfileImage,
-    deletePhoto
+    deletePhoto,
+    setMainPhoto
 }
 
 const mapState = state => ({
@@ -32,7 +32,7 @@ const mapState = state => ({
     photos: state.firestore.ordered.photos
   });
 
-const PhotosPage = ({uploadProfileImage, photos, profile, deletePhoto}) =>  {
+const PhotosPage = ({uploadProfileImage, photos, profile, deletePhoto, setMainPhoto}) =>  {
         const [files, setFiles] = useState([]);
         const [image, setImage] = useState(null);
 
@@ -61,6 +61,14 @@ const PhotosPage = ({uploadProfileImage, photos, profile, deletePhoto}) =>  {
         const handleDeletePhoto = async photo => {
           try {
             await deletePhoto(photo);
+          } catch (error) {
+            toastr.error('Oops', error.message);
+          }
+        };
+
+        const handleSetMainPhoto = async photo => {
+          try {
+            await setMainPhoto(photo);
           } catch (error) {
             toastr.error('Oops', error.message);
           }
@@ -106,7 +114,7 @@ const PhotosPage = ({uploadProfileImage, photos, profile, deletePhoto}) =>  {
                 </Grid>
 
                 <Divider/>
-                <UserPhotos photos={photos} profile={profile} deletePhoto={handleDeletePhoto} />
+                <UserPhotos photos={photos} profile={profile} deletePhoto={handleDeletePhoto} setMainPhoto={handleSetMainPhoto} />
             </Segment>
         );
     };
