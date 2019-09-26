@@ -13,7 +13,7 @@ const UserPhotos = ({photos, profile, deletePhoto, setMainPhoto}) => {
                   <Header sub color='teal' content='All Photos'/>
                   <Card.Group itemsPerRow={5}>
                   <Card>
-                        <Image src={profile.photoURL}/>
+                        <Image src={profile.photoURL || '/assets/user.png'}/>
                         <Button positive>Main Photo</Button>
                   </Card>
                         { photos && filteredPhotos.map( photo => (
