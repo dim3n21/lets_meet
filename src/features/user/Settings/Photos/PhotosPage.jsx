@@ -6,7 +6,7 @@ import {Image, Segment, Header, Divider, Grid, Button, Card} from 'semantic-ui-r
 import DropzoneInput from './DropzoneInput';
 import CropperInput from './CropperInput';
 import UserPhotos from './UserPhotos';
-import {uploadProfileImage} from '../../userActions';
+import {uploadProfileImage, deletePhoto} from '../../userActions';
 import { toastr } from 'react-redux-toastr';
 import { withRouter } from 'react-router-dom';
 
@@ -22,7 +22,8 @@ const query = ({ auth }) => {
   };
 
 const actions = {
-    uploadProfileImage
+    uploadProfileImage,
+    deletePhoto
 }
 
 const mapState = state => ({
@@ -31,7 +32,7 @@ const mapState = state => ({
     photos: state.firestore.ordered.photos
   });
 
-const PhotosPage = ({uploadProfileImage, photos, profile}) =>  {
+const PhotosPage = ({uploadProfileImage, photos, profile, deletePhoto}) =>  {
         const [files, setFiles] = useState([]);
         const [image, setImage] = useState(null);
 
@@ -51,11 +52,19 @@ const PhotosPage = ({uploadProfileImage, photos, profile}) =>  {
             }
           };
         
-          const handleCancelCrop = () => {
-            setFiles([]);
-            setImage(null);
-            
-          };
+        const handleCancelCrop = () => {
+          setFiles([]);
+          setImage(null);
+          
+        };
+
+        const handleDeletePhoto = async photo => {
+          try {
+            await deletePhoto(photo);
+          } catch (error) {
+            toastr.error('Oops', error.message);
+          }
+        };
 
         return (
             <Segment>
@@ -97,7 +106,7 @@ const PhotosPage = ({uploadProfileImage, photos, profile}) =>  {
                 </Grid>
 
                 <Divider/>
-                <UserPhotos photos={photos} profile={profile} />
+                <UserPhotos photos={photos} profile={profile} deletePhoto={handleDeletePhoto} />
             </Segment>
         );
     };
