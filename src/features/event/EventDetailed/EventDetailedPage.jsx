@@ -16,7 +16,7 @@ const mapStateToProps = (state, ownProps) => {
       let event = {};
      
       if (state.firestore.ordered.events && state.firestore.ordered.events.length > 0) {
-            event = state.firestore.ordered.events.filter(event => event.id === eventId)[0] || {};
+            event = state.firestore.ordered.events.filter(event => event.id === eventId)[0];
       }
 
       return {
@@ -33,6 +33,7 @@ class EventDetailedPage extends Component {
                   toastr.error(`Sorry`, `Event not found`);
             }
       }
+
       render() {
             const { event } = this.props;
             const attendees = event && event.attendees && objectToArray(event.attendees);

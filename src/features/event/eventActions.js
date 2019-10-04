@@ -32,14 +32,10 @@ export const createEvent = event => {
 };
 
 export const updateEvent = event => {
-  return async dispatch => {
+  return async (dispatch, getState, {getFirestore}) => {
+    const firestore = getFirestore();
     try {
-      dispatch({
-        type: UPDATE_EVENT,
-        payload: {
-          event
-        }
-      });
+      await firestore.update(`event/${event.id}`, event)
       toastr.success("Success", "Event has been updated");
     } catch (error) {
       toastr.error("Oops", "Something went wrong");
