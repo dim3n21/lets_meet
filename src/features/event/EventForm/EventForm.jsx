@@ -11,7 +11,7 @@ import {
 import { Segment, Form, Button, Grid, Header } from "semantic-ui-react";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
-import { updateEvent, createEvent } from "../eventActions";
+import { updateEvent, createEvent, cancelToggle } from "../eventActions";
 import TextInput from "../../../app/common/form/TextInput";
 import TextArea from "../../../app/common/form/TextArea";
 import SelectInput from "../../../app/common/form/SelectInput";
@@ -30,13 +30,15 @@ const mapStateToProps = (state, ownProps) => {
   }
 
   return {
-    initialValues: event
+    initialValues: event,
+    event
   };
 };
 
 const mapDispatchToProps = {
   updateEvent,
-  createEvent
+  createEvent,
+  cancelToggle
 };
 
 const validate = combineValidators({
@@ -128,7 +130,9 @@ class EventForm extends Component {
       initialValues,
       invalid,
       submitting,
-      pristine
+      pristine,
+      event, 
+      cancelToggle
     } = this.props;
     
     return (
@@ -210,6 +214,11 @@ class EventForm extends Component {
                 >
                   Cancel
                 </Button>
+                <Button type='button'
+                color={event.cancelled ? 'green' : 'red'}
+                floated='right'
+                content={event.cancelled ? 'Reactivate event' : 'Cancel event'} 
+                onClick={() => {cancelToggle(!event.cancelled, event.id)}}/>
               </Form>
             </Form>
           </Segment>
